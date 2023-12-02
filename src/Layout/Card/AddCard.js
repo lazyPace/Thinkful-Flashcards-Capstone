@@ -1,11 +1,15 @@
 import React from 'react'
 
-function AddCard ({ deck }) {
+import UpdateCards from './UpdateCards'
+
+function AddCard ({ deck, handleCreateCard }) {
   return (
-    <>
-      <h2>Add card to: {deck.name}</h2>
-      <p>Add card functionality to be built here.</p>
-    </>
+    <div>
+      <h2>
+        Add Card<span>{deck.name}</span>
+      </h2>
+      <UpdateCards deckId={deck.id} handleFormSubmit={handleCreateCard} />
+    </div>
   )
 }
 

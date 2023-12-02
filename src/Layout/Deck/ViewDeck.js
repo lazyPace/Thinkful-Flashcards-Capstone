@@ -13,7 +13,9 @@ function ViewDeck ({
   handleDeleteDeck,
   handleEditDeck,
   isDeckUpdated,
-  handleEditCard
+  handleEditCard,
+  handleCreateCard,
+  handleDeleteCard
 }) {
   const [deck, setDeck] = useState({})
   const [error, setError] = useState(undefined)
@@ -41,7 +43,7 @@ function ViewDeck ({
         </Route>
 
         <Route path={`${url}/cards/new`}>
-          <AddCard deck={deck} />
+          <AddCard deck={deck} handleCreateCard={handleCreateCard} />
         </Route>
 
         <Route path={`${url}/cards/:cardId/edit`}>
@@ -53,7 +55,11 @@ function ViewDeck ({
         </Route>
 
         <Route exact path={`${url}`}>
-          <DeckInfo deck={deck} handleDeleteDeck={handleDeleteDeck} />
+          <DeckInfo
+            deck={deck}
+            handleDeleteDeck={handleDeleteDeck}
+            handleDeleteCard={handleDeleteCard}
+          />
         </Route>
       </>
     )

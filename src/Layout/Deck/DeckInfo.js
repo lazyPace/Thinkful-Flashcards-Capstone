@@ -5,7 +5,7 @@ import CardList from '../Card/CardList'
 
 import Button from 'react-bootstrap/Button'
 
-export const DeckInfo = ({ deck, handleDeleteDeck }) => {
+export const DeckInfo = ({ deck, handleDeleteDeck, handleDeleteCard }) => {
   const { url } = useRouteMatch()
 
   return (
@@ -14,13 +14,13 @@ export const DeckInfo = ({ deck, handleDeleteDeck }) => {
       <p>{deck.description}</p>
       <div className='d-flex justify-content-between'>
         <div>
-          <Link to={`${url}/edit`}>
+          <Link to={`/decks/${deck.id}/edit`}>
             <Button>Edit</Button>
           </Link>
-          <Link to={`${url}/study`}>
+          <Link to={`/decks/${deck.id}/study`}>
             <Button>Study</Button>
           </Link>
-          <Link to={`${url}/cards/new`}>
+          <Link to={`/decks/${deck.id}/cards/new`}>
             <Button>Add Cards</Button>
           </Link>
         </div>
@@ -32,7 +32,7 @@ export const DeckInfo = ({ deck, handleDeleteDeck }) => {
       </div>
 
       <h2>Cards</h2>
-      <CardList deck={deck} />
+      <CardList deck={deck} handleDeleteCard={handleDeleteCard} />
     </>
   )
 }

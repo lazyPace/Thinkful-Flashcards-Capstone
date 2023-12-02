@@ -4,7 +4,7 @@ import { Link, useRouteMatch } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-export const CardItem = ({ front, back, id }) => {
+export const CardItem = ({ front, back, id, handleDeleteCard }) => {
   const { url } = useRouteMatch()
 
   return (
@@ -17,7 +17,11 @@ export const CardItem = ({ front, back, id }) => {
             Edit
           </Button>
         </Link>
-        <Button variant='danger' className='m-2'>
+        <Button
+          variant='danger'
+          className='m-2'
+          onClick={() => handleDeleteCard(id)}
+        >
           Delete
         </Button>
       </Card.Body>

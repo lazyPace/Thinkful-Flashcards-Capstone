@@ -20,10 +20,10 @@ function UpdateCards ({ card = null, handleFormSubmit, deckId }) {
   // edit handler to comply with edit functionality as well as create
   const handleSubmit = e => {
     e.preventDefault()
-    if (card) {
+    if (card !== null) {
       handleFormSubmit(card, formData)
     } else {
-      handleFormSubmit(formData)
+      handleFormSubmit(deckId, formData)
     }
     setFormData({ ...initialFormState })
   }
@@ -34,7 +34,7 @@ function UpdateCards ({ card = null, handleFormSubmit, deckId }) {
       <form className='form-container' onSubmit={handleSubmit}>
         <label>
           Front Side:
-          <input
+          <textarea
             required
             className='form-field'
             type='text'
@@ -56,7 +56,7 @@ function UpdateCards ({ card = null, handleFormSubmit, deckId }) {
             value={formData.back}
           />
         </label>
-        <Link to={`/decks/${card.deckId}`}>
+        <Link to={`/decks/${deckId}`}>
           <Button variant='secondary'>Cancel</Button>
         </Link>
 

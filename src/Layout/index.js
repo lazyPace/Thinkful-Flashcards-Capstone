@@ -12,7 +12,9 @@ import {
   createDeck,
   deleteDeck,
   updateDeck,
-  updateCard
+  updateCard,
+  createCard,
+  deleteCard
 } from '../utils/api/index'
 
 function Layout () {
@@ -28,6 +30,12 @@ function Layout () {
     const newDeck = await createDeck(formData)
     setDecks([...decks, newDeck])
     history.push(`/decks/${newDeck.id}`)
+  }
+  // Create a new card handler
+  const handleCreateCard = async (deckId, formData) => {
+    await createCard(deckId, formData)
+    setIsDeckUpdated(!isDeckUpdated)
+    history.push(`/decks/${deckId}/cards/new`)
   }
 
   // edit a deck handler
@@ -71,6 +79,18 @@ function Layout () {
       }
     }
   }
+  // delete a card handler
+  const handleDeleteCard = async cardId => {
+    const alert = window.confirm('Are you sure you want to delete this card?')
+    if (alert) {
+      try {
+        await deleteCard(cardId)
+        setIsDeckUpdated(!isDeckUpdated)
+      } catch (error) {
+        console.error('Error occurred during deletion.')
+      }
+    }
+  }
 
   // Fetch list of decks from the database
   useEffect(() => {
@@ -103,6 +123,8 @@ function Layout () {
               handleEditDeck={handleEditDeck}
               isDeckUpdated={isDeckUpdated}
               handleEditCard={handleEditCard}
+              handleCreateCard={handleCreateCard}
+              handleDeleteCard={handleDeleteCard}
             />
           </Route>
           <Route>

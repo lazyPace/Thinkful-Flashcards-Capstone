@@ -11,10 +11,9 @@
       "id": 2
     },
     {
-      "id": 3,
-      "desciption": "keep this",
-      "name": "The newest deck ",
-      "description": "this is a newer description"
+      "name": "New Deck",
+      "description": "This is a new deck",
+      "id": 3
     }
   ],
   "cards": [
@@ -52,8 +51,32 @@
       "cards": [],
       "deckId": 1,
       "id": 7,
-      "front": "c",
-      "back": "c"
+      "front": "d",
+      "back": "d"
+    },
+    {
+      "front": "card 1",
+      "back": "answer 1",
+      "deckId": 3,
+      "id": 8
+    },
+    {
+      "front": "card 2 ",
+      "back": "answer 2",
+      "deckId": 3,
+      "id": 9
+    },
+    {
+      "front": "card 3",
+      "back": "answer 3",
+      "deckId": 3,
+      "id": 10
+    },
+    {
+      "front": "card 4",
+      "back": "answer 4",
+      "deckId": 3,
+      "id": 11
     }
   ]
 }
