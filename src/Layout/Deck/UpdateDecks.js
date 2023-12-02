@@ -4,10 +4,10 @@ import { Link, useHistory } from 'react-router-dom'
 //Bootstrap imports
 import Button from 'react-bootstrap/Button'
 
-function CreateDeck ({ handleCreateDeck }) {
+function UpdateDecks ({ deck = null, handleFormSubmit }) {
   const initialFormState = {
-    name: '',
-    description: ''
+    name: deck?.name ?? '',
+    description: deck?.description ?? ''
   }
 
   const [formData, setFormData] = useState({ ...initialFormState })
@@ -18,28 +18,25 @@ function CreateDeck ({ handleCreateDeck }) {
     setFormData({ ...formData, [name]: value })
   }
 
+  // edit handler to comply with edit functionality as well as create
   const handleSubmit = e => {
     e.preventDefault()
-    handleCreateDeck(formData)
-    console.log(
-      'New deck created:',
-      formData.name + ' : ' + formData.description
-    )
+    if (deck) {
+      handleFormSubmit(deck, formData)
+    } else {
+      handleFormSubmit(formData)
+    }
     setFormData({ ...initialFormState })
   }
 
   return (
     <>
-      <Link to='/'>
-        <Button>Home</Button>
-      </Link>
-      <h2 class='create-header'>Create Deck</h2>
-      <form class='form-container' onSubmit={handleSubmit}>
+      <form className='form-container' onSubmit={handleSubmit}>
         <label>
           Name:
           <input
             required
-            class='form-field'
+            className='form-field'
             type='text'
             placeholder='Deck Name:'
             name='name'
@@ -51,7 +48,7 @@ function CreateDeck ({ handleCreateDeck }) {
           Description:
           <textarea
             required
-            class='form-field'
+            className='form-field'
             type='text'
             placeholder='Deck Description:'
             name='description'
@@ -69,4 +66,4 @@ function CreateDeck ({ handleCreateDeck }) {
   )
 }
 
-export default CreateDeck
+export default UpdateDecks

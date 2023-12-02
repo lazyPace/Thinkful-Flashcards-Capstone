@@ -11,9 +11,10 @@
       "id": 2
     },
     {
-      "name": "New Deck",
-      "description": "This is a new deck",
-      "id": 3
+      "id": 3,
+      "desciption": "keep this",
+      "name": "The newest deck ",
+      "description": "this is a newer description"
     }
   ],
   "cards": [

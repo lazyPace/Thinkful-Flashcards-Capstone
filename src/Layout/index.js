@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
+
 import Header from './Header'
 import NotFound from './NotFound'
-import Deck from './Deck'
-import CreateDeck from './CreateDeck'
-import { listDecks, createDeck, deleteDeck } from '../utils/api/index'
+import Deck from './Deck/Deck'
+import CreateDeck from './Deck/CreateDeck'
+import ViewDeck from './Deck/ViewDeck'
+
+import {
+  listDecks,
+  createDeck,
+  deleteDeck,
+  updateDeck
+} from '../utils/api/index'
 
 function Layout () {
   // store the user decks in state
   const [decks, setDecks] = useState([])
   const [error, setError] = useState(undefined)
+  const [isDeckUpdated, setIsDeckUpdated] = useState(false) // check for edits in existing decks for other components
+
   const history = useHistory()
 
   // Create a new deck handler
@@ -17,6 +27,19 @@ function Layout () {
     const newDeck = await createDeck(formData)
     setDecks([...decks, newDeck])
     history.push(`/decks/${newDeck.id}`)
+  }
+
+  // edit a deck handler
+  const handleEditDeck = async (deck, formData) => {
+    const { name, description, ...updatedInfo } = deck
+    const newDeck = {
+      ...updatedInfo,
+      name: formData.name,
+      description: formData.description
+    }
+    const updatedDeck = await updateDeck(newDeck)
+    setIsDeckUpdated(!isDeckUpdated)
+    history.push(`/decks/${updatedDeck.id}`)
   }
 
   // Delete a deck handler
@@ -28,6 +51,7 @@ function Layout () {
         setDecks(resultantDecks =>
           resultantDecks.filter(deck => deck.id !== deckId)
         )
+        setIsDeckUpdated(!isDeckUpdated)
         history.push('/')
       } catch (error) {
         console.error('Problem deleting deck: ', error)
@@ -40,7 +64,7 @@ function Layout () {
     const abortController = new AbortController()
     listDecks(abortController.signal).then(setDecks).catch(setError)
     return () => abortController.abort()
-  }, [])
+  }, [isDeckUpdated])
 
   // display error if applicable
   if (error) {
@@ -61,7 +85,11 @@ function Layout () {
           </Route>
 
           <Route path={'/decks/:deckId'}>
-            <p>Individual Deck Page</p>
+            <ViewDeck
+              handleDeleteDeck={handleDeleteDeck}
+              handleEditDeck={handleEditDeck}
+              isDeckUpdated={isDeckUpdated}
+            />
           </Route>
           <Route>
             <NotFound />
