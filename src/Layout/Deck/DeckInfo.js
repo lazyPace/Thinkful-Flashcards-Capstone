@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 
+import CardList from '../Card/CardList'
+
 import Button from 'react-bootstrap/Button'
 
 export const DeckInfo = ({ deck, handleDeleteDeck }) => {
@@ -28,6 +30,9 @@ export const DeckInfo = ({ deck, handleDeleteDeck }) => {
           </Button>
         </div>
       </div>
+
+      <h2>Cards</h2>
+      <CardList deck={deck} />
     </>
   )
 }

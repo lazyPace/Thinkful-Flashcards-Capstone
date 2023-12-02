@@ -11,7 +11,8 @@ import {
   listDecks,
   createDeck,
   deleteDeck,
-  updateDeck
+  updateDeck,
+  updateCard
 } from '../utils/api/index'
 
 function Layout () {
@@ -40,6 +41,18 @@ function Layout () {
     const updatedDeck = await updateDeck(newDeck)
     setIsDeckUpdated(!isDeckUpdated)
     history.push(`/decks/${updatedDeck.id}`)
+  }
+  // edit a card handler
+  const handleEditCard = async (card, formData) => {
+    const { front, back, ...updatedInfo } = card
+    const newCard = {
+      ...updatedInfo,
+      front: formData.front,
+      back: formData.back
+    }
+    const updatedCard = await updateCard(newCard)
+    setIsDeckUpdated(!isDeckUpdated)
+    history.push(`/decks/${updatedCard.deckId}`)
   }
 
   // Delete a deck handler
@@ -89,6 +102,7 @@ function Layout () {
               handleDeleteDeck={handleDeleteDeck}
               handleEditDeck={handleEditDeck}
               isDeckUpdated={isDeckUpdated}
+              handleEditCard={handleEditCard}
             />
           </Route>
           <Route>

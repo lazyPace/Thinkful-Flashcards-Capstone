@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-//Bootstrap imports
 import Button from 'react-bootstrap/Button'
 
-function UpdateDecks ({ deck = null, handleFormSubmit }) {
+function UpdateCards ({ card = null, handleFormSubmit, deckId }) {
   const initialFormState = {
-    name: deck?.name ?? '',
-    description: deck?.description ?? ''
+    front: card?.front ?? '',
+    back: card?.back ?? ''
   }
 
   const [formData, setFormData] = useState({ ...initialFormState })
@@ -17,53 +16,54 @@ function UpdateDecks ({ deck = null, handleFormSubmit }) {
     const { name, value } = target
     setFormData({ ...formData, [name]: value })
   }
-  console.log(deck)
+
   // edit handler to comply with edit functionality as well as create
   const handleSubmit = e => {
     e.preventDefault()
-    if (deck) {
-      handleFormSubmit(deck, formData)
+    if (card) {
+      handleFormSubmit(card, formData)
     } else {
       handleFormSubmit(formData)
     }
     setFormData({ ...initialFormState })
   }
 
+  console.log(card)
   return (
     <>
       <form className='form-container' onSubmit={handleSubmit}>
         <label>
-          Name:
+          Front Side:
           <input
             required
             className='form-field'
             type='text'
-            placeholder='Deck Name:'
-            name='name'
+            placeholder='Front of card:'
+            name='front'
             onChange={handleChange}
-            value={formData.name}
+            value={formData.front}
           />
         </label>
         <label>
-          Description:
+          Back Side:
           <textarea
             required
             className='form-field'
             type='text'
-            placeholder='Deck Description:'
-            name='description'
+            placeholder='Back side of card:'
+            name='back'
             onChange={handleChange}
-            value={formData.description}
+            value={formData.back}
           />
         </label>
-        <Link to={'/'}>
+        <Link to={`/decks/${card.deckId}`}>
           <Button variant='secondary'>Cancel</Button>
         </Link>
 
-        <Button type='submit'>Submit</Button>
+        <Button type='submit'>Save Card</Button>
       </form>
     </>
   )
 }
 
-export default UpdateDecks
+export default UpdateCards
