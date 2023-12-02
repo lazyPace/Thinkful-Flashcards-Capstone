@@ -4,7 +4,13 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { XCircle, Eye, Book } from 'react-bootstrap-icons'
 
-export const DeckItem = ({ id, name, description, count }) => {
+export const DeckItem = ({
+  id,
+  name,
+  description,
+  count,
+  handleDeleteDeck
+}) => {
   return (
     <Card className='m-2'>
       <Card.Body>
@@ -23,7 +29,11 @@ export const DeckItem = ({ id, name, description, count }) => {
             </Button>
           </div>
           <div>
-            <Button variant='danger' className='m-2'>
+            <Button
+              variant='danger'
+              className='m-2'
+              onClick={() => handleDeleteDeck(id)}
+            >
               <XCircle /> Delete Deck
             </Button>
           </div>

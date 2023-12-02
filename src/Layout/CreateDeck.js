@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 //Bootstrap imports
 import Button from 'react-bootstrap/Button'
@@ -30,12 +30,16 @@ function CreateDeck ({ handleCreateDeck }) {
 
   return (
     <>
-      <h2>Create Deck</h2>
-      <form onSubmit={handleSubmit}>
+      <Link to='/'>
+        <Button>Home</Button>
+      </Link>
+      <h2 class='create-header'>Create Deck</h2>
+      <form class='form-container' onSubmit={handleSubmit}>
         <label>
           Name:
           <input
             required
+            class='form-field'
             type='text'
             placeholder='Deck Name:'
             name='name'
@@ -47,6 +51,7 @@ function CreateDeck ({ handleCreateDeck }) {
           Description:
           <textarea
             required
+            class='form-field'
             type='text'
             placeholder='Deck Description:'
             name='description'
@@ -55,7 +60,7 @@ function CreateDeck ({ handleCreateDeck }) {
           />
         </label>
         <Link to={'/'}>
-          <Button>Cancel</Button>
+          <Button variant='secondary'>Cancel</Button>
         </Link>
 
         <Button type='submit'>Submit</Button>

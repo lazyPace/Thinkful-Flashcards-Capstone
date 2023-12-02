@@ -11,24 +11,9 @@
       "id": 2
     },
     {
-      "name": "My Deck",
-      "description": "this is a deck",
+      "name": "New Deck",
+      "description": "This is a new deck",
       "id": 3
-    },
-    {
-      "name": "My deck",
-      "description": "this is a deck",
-      "id": 4
-    },
-    {
-      "name": "My deck",
-      "description": "this is a dekc",
-      "id": 5
-    },
-    {
-      "name": "My deck",
-      "description": "I've created a deck of cards",
-      "id": 6
     }
   ],
   "cards": [
