@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -17,6 +18,18 @@ function StudyDeck ({ deck }) {
     if (activeCardIndex < numberOfCards - 1) {
       setFlipped(false)
       setActiveCardIndex(activeCardIndex + 1)
+    } else if (!flipped) {
+      setFlipped(true)
+    } else {
+      const restart = window.confirm(
+        `Restart cards?\n\nClick 'cancel' to return to the home page.`
+      )
+      if (restart) {
+        setActiveCardIndex(0)
+        setFlipped(!flipped)
+      } else {
+        window.location.href = '/'
+      }
     }
   }
 
@@ -26,6 +39,26 @@ function StudyDeck ({ deck }) {
       setActiveCardIndex(activeCardIndex - 1)
     }
   }
+
+  // Check if user is on last card and is flipped and sends a dialogue box if so
+  useEffect(() => {
+    if (activeCardIndex === numberOfCards - 1 && flipped) {
+      // Delay confirmation so last card will flip
+      const timer = setTimeout(() => {
+        const restart = window.confirm(
+          `Restart the deck?\n\nClick 'cancel' to return to home page.`
+        )
+        if (restart) {
+          setActiveCardIndex(0)
+          setFlipped(false)
+        } else {
+          window.location.href = '/'
+        }
+      }, 1000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [activeCardIndex, flipped, numberOfCards])
 
   return (
     <>
@@ -43,6 +76,12 @@ function StudyDeck ({ deck }) {
                 : ` are ${numberOfCards} cards `}
               in this deck.
             </Card.Text>
+            <Link
+              to={`/decks/${deck.id}/cards/new`}
+              className='btn btn-primary'
+            >
+              Add Cards
+            </Link>
           </Card.Body>
         </Card>
       ) : (
