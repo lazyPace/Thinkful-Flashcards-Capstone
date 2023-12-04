@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 
+import Breadcrumbs from '../Breadcrumbs'
 import CardList from '../Card/CardList'
 
 import Button from 'react-bootstrap/Button'
@@ -10,6 +11,7 @@ export const DeckInfo = ({ deck, handleDeleteDeck, handleDeleteCard }) => {
 
   return (
     <>
+      <Breadcrumbs extraItems={[deck.name]} />
       <h2>{deck.name}</h2>
       <p>{deck.description}</p>
       <div className='d-flex justify-content-between'>

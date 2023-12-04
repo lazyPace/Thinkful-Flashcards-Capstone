@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 
+import Breadcrumbs from '../Breadcrumbs'
+
 function StudyDeck ({ deck }) {
   const [flipped, setFlipped] = useState(false)
   const [activeCardIndex, setActiveCardIndex] = useState(0)
@@ -60,8 +62,10 @@ function StudyDeck ({ deck }) {
     }
   }, [activeCardIndex, flipped, numberOfCards])
 
+  console.log(deck)
   return (
     <>
+      <Breadcrumbs extraItems={[deck.name, 'Study']} />
       <h1>
         Study: <span>{deck.name}</span>
       </h1>

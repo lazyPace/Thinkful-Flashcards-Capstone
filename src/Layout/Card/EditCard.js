@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useParams } from 'react-router-dom'
 
+import Breadcrumbs from '../Breadcrumbs'
 import UpdateCards from './UpdateCards'
 
 function EditCard ({ deck, deckId, handleEditCard }) {
@@ -11,7 +12,8 @@ function EditCard ({ deck, deckId, handleEditCard }) {
   console.log(cardId)
   return (
     <>
-      <h2>Edit Card for {deck.name}</h2>
+      <Breadcrumbs extraItems={[deck.name, `Edit Card ${cardId}`]} />
+      <h2 className='text-center'>Edit Card for {deck.name}</h2>
       <UpdateCards
         card={card}
         handleFormSubmit={handleEditCard}

@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react'
+import Breadcrumbs from './Breadcrumbs'
 
-function NotFound() {
+function NotFound () {
   return (
-    <div className="NotFound">
-      <h1>Not Found</h1>
-    </div>
-  );
+    <>
+      <Breadcrumbs />
+      <div className='NotFound'>
+        <h1>Not Found</h1>
+      </div>
+    </>
+  )
 }
 
-export default NotFound;
+export default NotFound

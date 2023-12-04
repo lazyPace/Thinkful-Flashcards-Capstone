@@ -8,6 +8,7 @@ import EditCard from '../Card/EditCard'
 import DeckInfo from './DeckInfo'
 import StudyDeck from './StudyDeck'
 import AddCard from '../Card/AddCard'
+import Breadcrumbs from '../Breadcrumbs'
 
 function ViewDeck ({
   handleDeleteDeck,
@@ -30,7 +31,7 @@ function ViewDeck ({
     return () => abortController.abort()
   }, [deckId, isDeckUpdated])
 
-  console.log(deckId)
+  console.log(deck)
   if (deck.id) {
     return (
       <>
